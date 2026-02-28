@@ -7,41 +7,32 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.aims.authorization_imp.presentation.AuthorizationScreen
+import com.example.aims.authorization_imp.presentation.AuthorizationViewModel
+import com.example.aims.di.AuthorizationViewModelFactory
 import com.example.aims.ui.theme.AimsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val appComponent = (application as AimsApplication).appComponent
+        val authorizationComponent = appComponent.authorizationComponentFactory().create()
+        val factory = AuthorizationViewModelFactory(authorizationComponent)
+
         enableEdgeToEdge()
         setContent {
             AimsTheme {
+                val viewModel: AuthorizationViewModel = viewModel(factory = factory)
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    AuthorizationScreen(
+                        viewModel = viewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AimsTheme {
-        Greeting("Android")
     }
 }

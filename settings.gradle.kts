@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Aims"
 include(":app")
+include(":authorization_imp")
