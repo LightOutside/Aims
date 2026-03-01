@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.aims.authorization_imp.presentation.AuthorizationScreen
 import com.example.aims.authorization_imp.presentation.AuthorizationViewModel
-import com.example.aims.di.AuthorizationViewModelFactory
+import com.example.aims.authorization_imp.presentation.AuthorizationViewModelFactory
 import com.example.aims.ui.theme.AimsTheme
 
 class MainActivity : ComponentActivity() {
